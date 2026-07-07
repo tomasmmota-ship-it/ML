@@ -11,8 +11,8 @@ def hello():
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
-        rivet_length = float(request.form['L'])
         rivet_inner_diameter = float(request.form['Di'])
+        rivet_length = float(request.form['L'])
         die_diameter = float(request.form['Dc'])
         die_depth = float(request.form['Ld'])
     except (KeyError, ValueError):
