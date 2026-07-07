@@ -62,7 +62,7 @@
     <div class="canvas-container">
         <form action="/predict" method="POST">
             
-            <img src="/static/Front_end.png" style="width: 100%; max-width: 800px; margin: 0 auto; display: block;">
+            <img src="{{ url_for('static', filename='Front_end.png') }}" alt="Esquema da Junta" style="display: block; width: 500px; margin: 0 auto;">
             
             <input type="text" name="Di" placeholder="Enter Rivet Inner Diameter" 
                    class="input-default" style="top: 65px; left: 757px;" 
