@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction of Joint Characteristics</title>
+    <style>
+        /* Container principal com 1000px para garantir que a imagem fica grande */
+        .canvas-container {
+            position: relative;
+            width: 1000px; 
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        /* Ajustes nas caixas para comportar o texto longo */
+        .input-default {
+            position: absolute;
+            z-index: 10;
+            text-align: center; 
+            font-size: 17px;    
+            padding: 6px;
+            width: 200px;       
+        }
+
+        /* Estilos do botão alterados para o centrar em baixo */
+        button {
+            cursor: pointer;
+            font-size: 20px;
+            padding: 8px 25px;
+            display: block;      /* Permite usar margens automáticas para centrar */
+            margin: 40px auto 0; /* 40px de margem no topo para o afastar da imagem, auto nos lados, 0 em baixo */
+            background: #f2f2f2;
+            border: 1px solid #000;
+            color: #000;
+        }
+
+        .range-table {
+            position: absolute;
+            top: 10px;
+            right: -280px;
+            width: 260px;
+            border-collapse: collapse;
+            font-size: 16px;
+            background: #f2f2f2;
+            z-index: 20;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+            border: 1px solid #000;
+        }
+
+        .range-table th,
+        .range-table td {
+            border: 1px solid #000;
+            padding: 4px 6px;
+            text-align: center;
+            color: #000;
+        }
+    </style>   
+</head>
+<body style="background-color:white; font-family: sans-serif; text-align: center;">
+
+    <h1>{{ message }}</h1>
+
+    <div class="canvas-container">
+        <form action="/predict" method="POST">
+            
+            <img src="{{ url_for('static', filename='Front_end.png') }}" style="display: block; width: 100%; margin: 0 auto;">
+            
+            <input type="text" name="Di" placeholder="Enter Rivet Inner Diameter" 
+                   class="input-default" style="top: 65px; left: 757px;" 
+                   value="{{ form_values.get('Di', '') if form_values else '' }}" />
+
+            <input type="text" name="L" placeholder="Enter Rivet Length" 
+                   class="input-default" style="top: 117px; left: 757px;" 
+                   value="{{ form_values.get('L', '') if form_values else '' }}" />
+
+            <input type="text" name="Dc" placeholder="Enter Die Diameter" 
+                   class="input-default" style="top: 173px; left: 757px;" 
+                   value="{{ form_values.get('Dc', '') if form_values else '' }}" />
+
+            <input type="text" name="Ld" placeholder="Enter Die Depth" 
+                   class="input-default" style="top: 225px; left: 757px;" 
+                   value="{{ form_values.get('Ld', '') if form_values else '' }}" />
+
+            <table class="range-table">
+                <tr><th>Parameter</th><th>Application range</th></tr>
+                <tr><td>Rivet Length</td><td>4.0 - 5.0 mm</td></tr>
+                <tr><td>Rivet Inner Diameter</td><td>3.3 - 4.2 mm</td></tr>
+                <tr><td>Die Diameter</td><td>8.0 - 10.0 mm</td></tr>
+                <tr><td>Die Depth</td><td>0.7 - 1.0 mm</td></tr>
+            </table>
+
+            <button type="submit">Submit</button>
+
+            <input type="text" readonly
+                   class="input-default" style="top: 346px; left: 757px; width: 120px; height: 24px; padding: 2px 6px; font-size: 16px;" 
+                   value="{{ predictions.get('interlock', '') | round(5) if predictions else '' }}" />
+
+            <input type="text" readonly
+                   class="input-default" style="top: 398px; left: 757px; width: 120px; height: 24px; padding: 2px 6px; font-size: 16px;" 
+                   value="{{ predictions.get('bottom_thickness', '') | round(5) if predictions else '' }}" />
+
+            <input type="text" readonly
+                   class="input-default" style="top: 452px; left: 757px; width: 120px; height: 24px; padding: 2px 6px; font-size: 16px;" 
+                   value="{{ predictions.get('joining_force', '') | round(5) if predictions else '' }}" />
+            
+        </form>
+
+        <div style="margin-top: 30px; text-align: left;">
+            {% if error %}
+                <p style="color: red; font-size: 18px;">{{ error }}</p>
+            {% endif %}
+        </div>
+    </div>
+    
+</body>
+</html>
