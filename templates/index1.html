@@ -80,14 +80,28 @@
                    class="input-default" style="top: 225px; left: 757px;" 
                    value="{{ form_values.get('Ld', '') if form_values else '' }}" />
 
-            <table class="range-table">
-                <tr><th>Parameter</th><th>Application range</th></tr>
-                <tr><td>Rivet Inner Diameter</td><td>3.3 - 4.2 mm</td></tr>
-                <tr><td>Rivet Length</td><td>4.0 - 5.0 mm</td></tr>
-                <tr><td>Die Diameter</td><td>8.0 - 10.0 mm</td></tr>
-                <tr><td>Die Depth</td><td>0.7 - 1.0 mm</td></tr>
-            </table>
-
+           <table class="range-table">
+    <tr>
+        <th>Parameter</th>
+        <th>Application range</th>
+    </tr>
+    <tr>
+        <td>D<sub>i</sub></td>
+        <td>3.3 - 4.2 mm</td>
+    </tr>
+    <tr>
+        <td>L</td>
+        <td>4.0 - 5.0 mm</td>
+    </tr>
+    <tr>
+        <td>D<sub>c</sub></td>
+        <td>8.0 - 10.0 mm</td>
+    </tr>
+    <tr>
+        <td>l<sub>d</sub></td>
+        <td>0.7 - 1.0 mm</td>
+    </tr>
+</table>
             <button type="submit">Submit</button>
 
             <input type="text" readonly
